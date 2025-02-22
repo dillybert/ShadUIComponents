@@ -39,6 +39,27 @@ import {
 } from '@/components/ui/dialog';
 import { DialogContent } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import {
+  Carousel,
+  CarouselApi,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
+import { CarouselWithDots } from '@/components/carousel-with-dots';
+import React from 'react';
+import { cn } from '@/lib/utils';
 
 export default function Home() {
   const { toast } = useToast();
@@ -50,15 +71,29 @@ export default function Home() {
     newPassword: '',
   });
 
+  const SHEET_SIDES = ['top', 'right', 'bottom', 'left'] as const;
+
+  const slideCount = 6;
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
+
   const data = [
     {
       goal: 400,
-    },
-    {
-      goal: 300,
-    },
-    {
-      goal: 200,
     },
     {
       goal: 300,
@@ -99,6 +134,39 @@ export default function Home() {
   return (
     <div>
       <h1 className="text-4xl mb-2 font-bold">ShadUi components</h1>
+      <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">
+        Carousel
+      </h3>
+      <Carousel setApi={setApi} className="w-full relative">
+        <CarouselContent className="-ml-1">
+          {Array.from({ length: slideCount }).map((_, index) => (
+            <CarouselItem
+              key={index}
+              className="pl-1 sm:basis-1/2 md:basis-1/2 lg:basis-1/3"
+            >
+              <div className="border w-full h-[230px] rounded-md flex">
+                <img
+                  className="size-full object-cover rounded-md"
+                  src={`https://picsum.photos/350/230?random=${index}`}
+                  loading="lazy"
+                />
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <div className="absolute bottom-2 left-0 right-0 w-fit mx-auto px-2 py-1 flex justify-center items-center gap-1 h-4 z-50 bg-gray-500/40 rounded-xl ">
+          {Array.from({ length: count }).map((_, index) => (
+            <span
+              key={index}
+              className={cn(
+                'w-2 h-2 rounded-full bg-black transition-all',
+                current - 1 === index ? 'bg-slate-200' : 'bg-gray-900/30'
+              )}
+            ></span>
+          ))}
+        </div>
+      </Carousel>
+
       <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">
         Buttons
       </h3>
@@ -177,7 +245,10 @@ export default function Home() {
                   type="password"
                   value={passwordData.current}
                   onChange={(e) =>
-                    setPasswordData({ ...passwordData, current: e.target.value })
+                    setPasswordData({
+                      ...passwordData,
+                      current: e.target.value,
+                    })
                   }
                 />
               </div>
@@ -188,7 +259,10 @@ export default function Home() {
                   type="password"
                   value={passwordData.newPassword}
                   onChange={(e) =>
-                    setPasswordData({ ...passwordData, newPassword: e.target.value })
+                    setPasswordData({
+                      ...passwordData,
+                      newPassword: e.target.value,
+                    })
                   }
                 />
               </div>
@@ -386,6 +460,55 @@ export default function Home() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">
+        Sheets
+      </h3>
+      <div className="grid grid-cols-2 gap-2">
+        {SHEET_SIDES.map((side) => (
+          <Sheet key={side}>
+            <SheetTrigger asChild>
+              <Button>{side}</Button>
+            </SheetTrigger>
+            <SheetContent side={side}>
+              <SheetHeader>
+                <SheetTitle>Edit profile</SheetTitle>
+                <SheetDescription>
+                  Make changes to your profile here. Click save when you're
+                  done.
+                </SheetDescription>
+              </SheetHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="name" className="text-right">
+                    Name
+                  </Label>
+                  <Input
+                    id="name"
+                    value="Pedro Duarte"
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="username" className="text-right">
+                    Username
+                  </Label>
+                  <Input
+                    id="username"
+                    value="@peduarte"
+                    className="col-span-3"
+                  />
+                </div>
+              </div>
+              <SheetFooter>
+                <SheetClose asChild>
+                  <Button type="submit">Save changes</Button>
+                </SheetClose>
+              </SheetFooter>
+            </SheetContent>
+          </Sheet>
+        ))}
+      </div>
     </div>
   );
 }
