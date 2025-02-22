@@ -1,22 +1,44 @@
-"use client"
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/hooks/use-toast";
-import { Copy, Minus, Plus } from "lucide-react";
-import { toast as sonner } from "sonner";
-import { Bar, BarChart, ResponsiveContainer } from "recharts";
-import { useState } from "react";
-import { Dialog, DialogTitle, DialogHeader, DialogTrigger, DialogDescription, DialogFooter, DialogClose } from "@/components/ui/dialog";
-import { DialogContent } from "@/components/ui/dialog";
-import { Switch } from "@/components/ui/switch";
-
-
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useToast } from '@/hooks/use-toast';
+import { Copy, Minus, Plus } from 'lucide-react';
+import { toast as sonner } from 'sonner';
+import { Bar, BarChart, ResponsiveContainer } from 'recharts';
+import { useState } from 'react';
+import {
+  Dialog,
+  DialogTitle,
+  DialogHeader,
+  DialogTrigger,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from '@/components/ui/dialog';
+import { DialogContent } from '@/components/ui/dialog';
+import { Switch } from '@/components/ui/switch';
 
 export default function Home() {
   const { toast } = useToast();
@@ -62,7 +84,7 @@ export default function Home() {
     {
       goal: 349,
     },
-  ]
+  ];
 
   function onClick(value: number) {
     setGoal(Math.max(200, Math.min(400, goal + value)));
@@ -71,7 +93,9 @@ export default function Home() {
   return (
     <div>
       <h1 className="text-4xl mb-2 font-bold">ShadUi components</h1>
-      <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">Buttons</h3>
+      <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">
+        Buttons
+      </h3>
       <div className="flex gap-2 flex-wrap">
         <Button variant="default">Click me</Button>
         <Button variant="outline">Click me</Button>
@@ -82,7 +106,9 @@ export default function Home() {
         <Button variant="secondary">Click me</Button>
       </div>
 
-      <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">Switch</h3>
+      <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">
+        Switch
+      </h3>
       <div className="flex items-center gap-2">
         <Switch id="airplane-mode" />
         <Label htmlFor="airplane-mode">Airplane Mode</Label>
@@ -105,11 +131,11 @@ export default function Home() {
             <CardContent className="space-y-2">
               <div className="space-y-1">
                 <Label htmlFor="name">Name</Label>
-                <Input id="name" defaultValue="Pedro Duarte" />
+                <Input id="name" />
               </div>
               <div className="space-y-1">
                 <Label htmlFor="username">Username</Label>
-                <Input id="username" defaultValue="@peduarte" />
+                <Input id="username" />
               </div>
             </CardContent>
             <CardFooter>
@@ -150,7 +176,9 @@ export default function Home() {
         </CardHeader>
       </Card>
 
-      <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">Skeleton</h3>
+      <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">
+        Skeleton
+      </h3>
       <div className="flex items-center space-x-4">
         <Skeleton className="h-12 w-12 rounded-full" />
         <div className="space-y-2">
@@ -159,24 +187,40 @@ export default function Home() {
         </div>
       </div>
 
-      <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">Toaster</h3>
+      <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">
+        Toaster
+      </h3>
       <div className="flex gap-2">
-        <Button onClick={() => sonner("Hello", { 
-          description: "This is a description", 
-          action: { 
-            label: "Click me", onClick: () => sonner("Hello") 
-            } 
+        <Button
+          onClick={() =>
+            sonner('Hello', {
+              description: 'This is a description',
+              action: {
+                label: 'Click me',
+                onClick: () => sonner('Hello'),
+              },
+            })
           }
-          )}>Show sonner</Button>
-        
-        <Button onClick={() => toast({ 
-          variant: "default",
-          title: "Hello", 
-          description: "This is a description" 
-        })}>Show toast</Button>
+        >
+          Show sonner
+        </Button>
+
+        <Button
+          onClick={() =>
+            toast({
+              variant: 'default',
+              title: 'Hello',
+              description: 'This is a description',
+            })
+          }
+        >
+          Show toast
+        </Button>
       </div>
 
-      <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">Drawer</h3>
+      <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">
+        Drawer
+      </h3>
       <Drawer>
         <DrawerTrigger asChild>
           <Button>Open drawer</Button>
@@ -185,7 +229,9 @@ export default function Home() {
           <div className="mx-auto w-full max-w-sm">
             <DrawerHeader>
               <DrawerTitle>Move Goal</DrawerTitle>
-              <DrawerDescription>Set your daily activity goal.</DrawerDescription>
+              <DrawerDescription>
+                Set your daily activity goal.
+              </DrawerDescription>
             </DrawerHeader>
             <div className="p-4 pb-0">
               <div className="flex items-center justify-center space-x-2">
@@ -225,7 +271,7 @@ export default function Home() {
                       dataKey="goal"
                       style={
                         {
-                          fill: "hsl(var(--foreground))",
+                          fill: 'hsl(var(--foreground))',
                           opacity: 0.9,
                         } as React.CSSProperties
                       }
@@ -244,7 +290,9 @@ export default function Home() {
         </DrawerContent>
       </Drawer>
 
-      <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">Dialog</h3>
+      <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">
+        Dialog
+      </h3>
       <Dialog>
         <DialogTrigger asChild>
           <Button>Open dialog</Button>
@@ -267,24 +315,27 @@ export default function Home() {
                 readOnly
               />
             </div>
-            <Button 
-              type="button" 
-              size="sm" 
+            <Button
+              type="button"
+              size="sm"
               className="px-3"
               onClick={() => {
-                const link = document.getElementById("link") as HTMLInputElement;
-                navigator.clipboard.writeText(link.value)
+                const link = document.getElementById(
+                  'link'
+                ) as HTMLInputElement;
+                navigator.clipboard
+                  .writeText(link.value)
                   .then(() => {
                     toast({
-                      title: "Copied to clipboard",
-                      description: "You can now paste it anywhere",
-                    })
+                      title: 'Copied to clipboard',
+                      description: 'You can now paste it anywhere',
+                    });
                   })
                   .catch((err) => {
                     toast({
-                      variant: "destructive",
-                      title: "Failed to copy",
-                      description: "Please try again",
+                      variant: 'destructive',
+                      title: 'Failed to copy',
+                      description: 'Please try again',
                     });
                     console.error(err);
                   });
