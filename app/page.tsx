@@ -44,6 +44,12 @@ export default function Home() {
   const { toast } = useToast();
   const [goal, setGoal] = useState(350);
 
+  const [accountData, setAccountData] = useState({ name: '', username: '' });
+  const [passwordData, setPasswordData] = useState({
+    current: '',
+    newPassword: '',
+  });
+
   const data = [
     {
       goal: 400,
@@ -131,11 +137,23 @@ export default function Home() {
             <CardContent className="space-y-2">
               <div className="space-y-1">
                 <Label htmlFor="name">Name</Label>
-                <Input id="name" />
+                <Input
+                  id="name"
+                  value={accountData.name}
+                  onChange={(e) =>
+                    setAccountData({ ...accountData, name: e.target.value })
+                  }
+                />
               </div>
               <div className="space-y-1">
                 <Label htmlFor="username">Username</Label>
-                <Input id="username" />
+                <Input
+                  id="username"
+                  value={accountData.username}
+                  onChange={(e) =>
+                    setAccountData({ ...accountData, username: e.target.value })
+                  }
+                />
               </div>
             </CardContent>
             <CardFooter>
@@ -154,11 +172,25 @@ export default function Home() {
             <CardContent className="space-y-2">
               <div className="space-y-1">
                 <Label htmlFor="current">Current password</Label>
-                <Input id="current" type="password" />
+                <Input
+                  id="current"
+                  type="password"
+                  value={passwordData.current}
+                  onChange={(e) =>
+                    setPasswordData({ ...passwordData, current: e.target.value })
+                  }
+                />
               </div>
               <div className="space-y-1">
                 <Label htmlFor="new">New password</Label>
-                <Input id="new" type="password" />
+                <Input
+                  id="new"
+                  type="password"
+                  value={passwordData.newPassword}
+                  onChange={(e) =>
+                    setPasswordData({ ...passwordData, newPassword: e.target.value })
+                  }
+                />
               </div>
             </CardContent>
             <CardFooter>
