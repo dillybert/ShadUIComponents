@@ -53,11 +53,8 @@ import {
   Carousel,
   CarouselApi,
   CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+  CarouselItem
 } from '@/components/ui/carousel';
-import { CarouselWithDots } from '@/components/carousel-with-dots';
 import React from 'react';
 import { cn } from '@/lib/utils';
 
@@ -474,7 +471,7 @@ export default function Home() {
               <SheetHeader>
                 <SheetTitle>Edit profile</SheetTitle>
                 <SheetDescription>
-                  Make changes to your profile here. Click save when you're
+                  Make changes to your profile here. Click save when youre
                   done.
                 </SheetDescription>
               </SheetHeader>
