@@ -134,16 +134,16 @@ export default function Home() {
       <h3 className="mb-2 mt-7 text-2xl font-semibold tracking-tight">
         Carousel
       </h3>
-      <Carousel setApi={setApi} className="w-full relative">
-        <CarouselContent className="-ml-2">
+      <Carousel
+        setApi={setApi}
+        className="w-full relative border rounded-md overflow-hidden"
+      >
+        <CarouselContent className="ml-0">
           {Array.from({ length: slideCount }).map((_, index) => (
-            <CarouselItem
-              key={index}
-              className="pl-2 sm:basis-1/2 md:basis-1/2 lg:basis-1/3"
-            >
-              <div className="border w-full h-[230px] rounded-md flex">
+            <CarouselItem key={index} className="pl-0 w-[350px] h-[230px]">
+              <div className="w-[350px] h-[230px]">
                 <img
-                  className="size-full object-cover rounded-md"
+                  className="size-full w-fit object-cover"
                   src={`https://picsum.photos/350/230?random=${index}`}
                   loading="lazy"
                   width={350}
