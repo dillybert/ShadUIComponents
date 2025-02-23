@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 import {
   Drawer,
   DrawerClose,
@@ -18,16 +18,16 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@/components/ui/drawer';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useToast } from '@/hooks/use-toast';
-import { Copy, Minus, Plus } from 'lucide-react';
-import { toast as sonner } from 'sonner';
-import { Bar, BarChart, ResponsiveContainer } from 'recharts';
-import { useState } from 'react';
+} from "@/components/ui/drawer";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useToast } from "@/hooks/use-toast";
+import { Copy, Minus, Plus } from "lucide-react";
+import { toast as sonner } from "sonner";
+import { Bar, BarChart, ResponsiveContainer } from "recharts";
+import { useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -36,9 +36,9 @@ import {
   DialogDescription,
   DialogFooter,
   DialogClose,
-} from '@/components/ui/dialog';
-import { DialogContent } from '@/components/ui/dialog';
-import { Switch } from '@/components/ui/switch';
+} from "@/components/ui/dialog";
+import { DialogContent } from "@/components/ui/dialog";
+import { Switch } from "@/components/ui/switch";
 import {
   Sheet,
   SheetClose,
@@ -48,29 +48,29 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet';
+} from "@/components/ui/sheet";
 import {
   Carousel,
   CarouselApi,
   CarouselContent,
-  CarouselItem
-} from '@/components/ui/carousel';
-import React from 'react';
-import { cn } from '@/lib/utils';
+  CarouselItem,
+} from "@/components/ui/carousel";
+import React from "react";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   const { toast } = useToast();
   const [goal, setGoal] = useState(350);
 
-  const [accountData, setAccountData] = useState({ name: '', username: '' });
+  const [accountData, setAccountData] = useState({ name: "", username: "" });
   const [passwordData, setPasswordData] = useState({
-    current: '',
-    newPassword: '',
+    current: "",
+    newPassword: "",
   });
 
-  const SHEET_SIDES = ['top', 'right', 'bottom', 'left'] as const;
+  const SHEET_SIDES = ["top", "right", "bottom", "left"] as const;
 
-  const slideCount = 6;
+  const slideCount = 7;
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
@@ -83,7 +83,7 @@ export default function Home() {
     setCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap() + 1);
 
-    api.on('select', () => {
+    api.on("select", () => {
       setCurrent(api.selectedScrollSnap() + 1);
     });
   }, [api]);
@@ -135,29 +135,31 @@ export default function Home() {
         Carousel
       </h3>
       <Carousel setApi={setApi} className="w-full relative">
-        <CarouselContent className="-ml-1">
+        <CarouselContent className="-ml-2">
           {Array.from({ length: slideCount }).map((_, index) => (
             <CarouselItem
               key={index}
-              className="pl-1 sm:basis-1/2 md:basis-1/2 lg:basis-1/3"
+              className="pl-2 sm:basis-1/2 md:basis-1/2 lg:basis-1/3"
             >
               <div className="border w-full h-[230px] rounded-md flex">
                 <img
                   className="size-full object-cover rounded-md"
                   src={`https://picsum.photos/350/230?random=${index}`}
                   loading="lazy"
+                  width={350}
+                  height={230}
                 />
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
-        <div className="absolute bottom-2 left-0 right-0 w-fit mx-auto px-2 py-1 flex justify-center items-center gap-1 h-4 z-50 bg-gray-500/40 rounded-xl ">
+        <div className="absolute bottom-2 left-0 right-0 w-fit mx-auto px-2 py-1 flex justify-center items-center gap-1 h-4 z-20 bg-gray-500/40 rounded-xl ">
           {Array.from({ length: count }).map((_, index) => (
             <span
               key={index}
               className={cn(
-                'w-2 h-2 rounded-full bg-black transition-all',
-                current - 1 === index ? 'bg-slate-200' : 'bg-gray-900/30'
+                "w-1 h-1 rounded-full transition-all",
+                current - 1 === index ? "bg-slate-200" : "bg-gray-900/30"
               )}
             ></span>
           ))}
@@ -296,11 +298,11 @@ export default function Home() {
       <div className="flex gap-2">
         <Button
           onClick={() =>
-            sonner('Hello', {
-              description: 'This is a description',
+            sonner("Hello", {
+              description: "This is a description",
               action: {
-                label: 'Click me',
-                onClick: () => sonner('Hello'),
+                label: "Click me",
+                onClick: () => sonner("Hello"),
               },
             })
           }
@@ -311,9 +313,9 @@ export default function Home() {
         <Button
           onClick={() =>
             toast({
-              variant: 'default',
-              title: 'Hello',
-              description: 'This is a description',
+              variant: "default",
+              title: "Hello",
+              description: "This is a description",
             })
           }
         >
@@ -374,7 +376,7 @@ export default function Home() {
                       dataKey="goal"
                       style={
                         {
-                          fill: 'hsl(var(--foreground))',
+                          fill: "hsl(var(--foreground))",
                           opacity: 0.9,
                         } as React.CSSProperties
                       }
@@ -424,21 +426,21 @@ export default function Home() {
               className="px-3"
               onClick={() => {
                 const link = document.getElementById(
-                  'link'
+                  "link"
                 ) as HTMLInputElement;
                 navigator.clipboard
                   .writeText(link.value)
                   .then(() => {
                     toast({
-                      title: 'Copied to clipboard',
-                      description: 'You can now paste it anywhere',
+                      title: "Copied to clipboard",
+                      description: "You can now paste it anywhere",
                     });
                   })
                   .catch((err) => {
                     toast({
-                      variant: 'destructive',
-                      title: 'Failed to copy',
-                      description: 'Please try again',
+                      variant: "destructive",
+                      title: "Failed to copy",
+                      description: "Please try again",
                     });
                     console.error(err);
                   });
@@ -471,8 +473,7 @@ export default function Home() {
               <SheetHeader>
                 <SheetTitle>Edit profile</SheetTitle>
                 <SheetDescription>
-                  Make changes to your profile here. Click save when youre
-                  done.
+                  Make changes to your profile here. Click save when youre done.
                 </SheetDescription>
               </SheetHeader>
               <div className="grid gap-4 py-4">
@@ -484,6 +485,7 @@ export default function Home() {
                     id="name"
                     value="Pedro Duarte"
                     className="col-span-3"
+                    autoFocus={false}
                   />
                 </div>
                 <div className="grid grid-cols-4 items-center gap-4">
@@ -494,6 +496,7 @@ export default function Home() {
                     id="username"
                     value="@peduarte"
                     className="col-span-3"
+                    autoFocus={false}
                   />
                 </div>
               </div>
