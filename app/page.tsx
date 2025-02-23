@@ -142,7 +142,7 @@ export default function Home() {
           {Array.from({ length: slideCount }).map((_, index) => (
             <CarouselItem key={index} className="pl-0 w-full h-[230px]">
                 <img
-                  className="size-full w-fit object-cover"
+                  className="size-full object-cover"
                   src={`https://picsum.photos/350/230?random=${index}`}
                   loading="lazy"
                 />
