@@ -140,7 +140,7 @@ export default function Home() {
       >
         <CarouselContent className="ml-0">
           {Array.from({ length: slideCount }).map((_, index) => (
-            <CarouselItem key={index} className="pl-0 w-[350px] h-[230px]">
+            <CarouselItem key={index} className="pl-0 w-[350px] h-[230px] basis-auto">
               <div className="w-[350px] h-[230px]">
                 <img
                   className="size-full w-fit object-cover"
