@@ -155,7 +155,7 @@ export default function Home() {
             <span
               key={index}
               className={cn(
-                "w-1 h-1 rounded-full transition-all",
+                "w-1 h-1 rounded-full transition",
                 current - 1 === index ? "bg-slate-200" : "bg-gray-900/30"
               )}
             ></span>
